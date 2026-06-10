@@ -1,0 +1,119 @@
+@font-face {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("/fonts/dm-sans.woff2") format("woff2");
+}
+@font-face {
+  font-family: "DM Sans";
+  font-style: italic;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("/fonts/dm-sans-italic.woff2") format("woff2");
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body {
+    @apply font-sans bg-cream text-ink antialiased;
+    line-height: 1.6;
+    font-size: 16px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+}
+
+@layer utilities {
+  .select-field {
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7a6a' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.9rem center;
+    padding-right: 2.2rem;
+  }
+  .nav-link-active {
+    @apply text-green font-semibold;
+  }
+  .nav-link-active::after {
+    transform: scaleX(1) !important;
+  }
+  /* Star fill partial support */
+  .stars-display { letter-spacing: 0.05em; }
+  .dot-blink {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--lime, #6cc04a);
+    animation: blink 2s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+
+/* ── Lightbox overlay ── */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(15, 26, 13, 0.93);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.2s ease;
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* ── Popup toast ── */
+.popup-toast {
+  position: fixed;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999;
+  min-width: 320px;
+  max-width: 480px;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 40px rgba(15,26,13,0.18);
+  font-weight: 500;
+  animation: slideDown 0.3s ease;
+}
+@keyframes slideDown {
+  from { opacity: 0; transform: translateX(-50%) translateY(-16px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+/* ── Cookie banner ── */
+.cookie-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 600;
+  background: #fff;
+  border-top: 1.5px solid #dde5db;
+  padding: 1.1rem 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  box-shadow: 0 -4px 24px rgba(15,26,13,0.08);
+}
+
+/* ── Scroll reveal ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}

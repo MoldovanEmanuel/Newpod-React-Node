@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /admin
+
+Sitemap: https://newpod.ro/sitemap.xml
